@@ -1,4 +1,6 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
+import { AutenticacaoService } from 'src/app/services/autenticacao.service';
 
 @Component({
   selector: 'app-welcome',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private socialAuthService: SocialAuthService,
+    private autenticacaoService: AutenticacaoService) { }
 
   ngOnInit() {
+    this.socialAuthService.authState.subscribe((user) => {
+      this.autenticacaoService.passarDadosDeLogin(user);
+    });
   }
 
 }
