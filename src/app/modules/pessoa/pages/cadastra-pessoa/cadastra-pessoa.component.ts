@@ -76,7 +76,7 @@ export class CadastraPessoaComponent implements OnInit {
   submitForm() {
     this.isLoading = true;
     this.salvarPessoaRequest = {
-      cpf: this.pessoaForm.get('cpf')?.value,
+      cpf: this.pessoaForm.get('cpf')?.value?.replace(/\D/g,''),
       dataNascimento: this.pessoaForm.get('nascimento')?.value,
       nome: this.pessoaForm.get('nome')?.value,
       usuario: this.autenticacaoService.pegarUsuarioLogado().email

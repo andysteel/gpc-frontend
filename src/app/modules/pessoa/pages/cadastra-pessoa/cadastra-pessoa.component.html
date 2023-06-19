@@ -14,13 +14,13 @@
   <nz-form-item>
     <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cpf">CPF</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="O CPF precisa ser informado">
-      <input nz-input formControlName="cpf" id="cpf" />
+      <input nz-input maxlength="14" formControlName="cpf" id="cpf" />
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cpf">Data de Nascimento</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="A Data de Nascimento precisa ser informada">
-      <nz-date-picker formControlName="nascimento"></nz-date-picker>
+      <nz-date-picker [nzFormat]="'dd/MM/yyyy'" formControlName="nascimento"></nz-date-picker>
     </nz-form-control>
   </nz-form-item>
   <app-titulo-pagina [titulo]="'Contatos'"></app-titulo-pagina>
@@ -52,6 +52,7 @@
       >
       <input
         nz-input
+        maxlength="14"
         [attr.id]="contato.idForm"
         [formControlName]="contato.controlFormTel"
       />
@@ -64,7 +65,7 @@
       <nz-form-control
       [nzXs]="24"
       [nzSm]="14"
-      nzErrorTip="O email precisa ser informado"
+      nzErrorTip="Um email valido precisa ser informado"
       >
       <input
         nz-input

@@ -1,6 +1,9 @@
 
-<div class="logout">
-  <span title="logout"  style="font-size: 2em;" (click)="logOut()"  nz-icon nzType="logout" nzTheme="outline"></span>
+<div  class="logout">
+  <button nz-button nzType="default" (click)="logOut()">
+    <span nz-icon nzType="logout"></span>
+    Logout
+  </button>
 </div>
 <div class="pessoas">
   <h1>Pessoas Cadastradas</h1>
@@ -34,11 +37,11 @@
     <tr *ngFor="let data of filterTable.data">
       <td>{{ data.nome }}</td>
       <td>{{ data.cpf }}</td>
-      <td>{{ data.dataNascimento }}</td>
+      <td>{{ data.dataNascimento | date: 'dd/MM/yyyy' }}</td>
       <td>
-        <span class="acao" title="contatos" (click)="abrirModalContatos(data)" nz-icon nzType="contacts" nzTheme="outline"></span>
+        <span class="acao" style="font-size: 2em;" title="contatos" (click)="abrirModalContatos(data)" nz-icon nzType="contacts" nzTheme="outline"></span>
         <nz-divider nzType="vertical"></nz-divider>
-        <span class="acao" title="apagar" (click)="showConfirm(data)" nz-icon nzType="delete" nzTheme="outline"></span>
+        <span class="acao" style="font-size: 2em;" title="apagar" (click)="showConfirm(data)" nz-icon nzType="delete" nzTheme="outline"></span>
       </td>
     </tr>
   </tbody>
