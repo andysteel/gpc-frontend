@@ -63,7 +63,7 @@ const clientID = environment.envVar.GCLIENT_ID;
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(clientID),
+            provider: new GoogleLoginProvider('294064042774-8qk8hn421ugqcss9o8kkvgrucp0la345.apps.googleusercontent.com'),
           },
         ],
         onError: (err) => console.error(err)
