@@ -1,0 +1,100 @@
+<nz-spin [nzSpinning]="isLoading" [nzSize]="'large'" nzTip="Carregando...">
+  <span class="alinhar-direita">
+    <button nz-button nzType="primary" (click)="voltar()">Voltar</button>
+  </span>
+<app-titulo-pagina [titulo]="'Cadastar Pessoa'"></app-titulo-pagina>
+
+<form nz-form [formGroup]="pessoaForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="nome">Nome</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="O nome precisa ser informado">
+      <input nz-input formControlName="nome" id="nome" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cpf">CPF</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="O CPF precisa ser informado">
+      <input nz-input formControlName="cpf" id="cpf" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="cpf">Data de Nascimento</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="A Data de Nascimento precisa ser informada">
+      <nz-date-picker formControlName="nascimento"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+  <app-titulo-pagina [titulo]="'Contatos'"></app-titulo-pagina>
+  <div *ngFor="let contato of contatos; let i = index">
+    <nz-form-item >
+      <nz-form-label nzRequired [nzXs]="24" [nzSm]="8"  [nzFor]="contato.controlFormNome">
+        Nome
+      </nz-form-label>
+      <nz-form-control
+      [nzXs]="24"
+      [nzSm]="14"
+      nzErrorTip="O nome precisa ser informado"
+      >
+      <input
+        nz-input
+        [attr.id]="contato.idForm"
+        [formControlName]="contato.controlFormNome"
+      />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item >
+      <nz-form-label nzRequired [nzXs]="24" [nzSm]="8"  [nzFor]="contato.controlFormTel">
+        Telefone
+      </nz-form-label>
+      <nz-form-control
+      [nzXs]="24"
+      [nzSm]="14"
+      nzErrorTip="O telefone precisa ser informado"
+      >
+      <input
+        nz-input
+        [attr.id]="contato.idForm"
+        [formControlName]="contato.controlFormTel"
+      />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item >
+      <nz-form-label nzRequired [nzXs]="24" [nzSm]="8"  [nzFor]="contato.controlFormEmail">
+        Email
+      </nz-form-label>
+      <nz-form-control
+      [nzXs]="24"
+      [nzSm]="14"
+      nzErrorTip="O email precisa ser informado"
+      >
+      <input
+        nz-input
+        [attr.id]="contato.idForm"
+        [formControlName]="contato.controlFormEmail"
+      />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item *ngIf="i > 0">
+      <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 10 }">
+        <button nz-button nzDanger (click)="removerContato(contato, $event)">
+          <span nz-icon nzType="minus-circle-o"></span>
+          Remover contato
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-divider nzText="Contato"></nz-divider>
+  </div>
+  <nz-form-item>
+    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 10 }">
+      <button nz-button nzType="dashed" class="add-button" (click)="adicionarContato($event)">
+        <span nz-icon nzType="plus"></span>
+        Adicionar contato
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 20, offset: 11 }">
+      <button nz-button nzType="primary" [disabled]="!pessoaForm.valid">salvar</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+</nz-spin>

@@ -1,0 +1,68 @@
+
+<div class="logout">
+  <span title="logout"  style="font-size: 2em;" (click)="logOut()"  nz-icon nzType="logout" nzTheme="outline"></span>
+</div>
+<div class="pessoas">
+  <h1>Pessoas Cadastradas</h1>
+</div>
+<button nz-button nzType="primary" (click)="navegarCadastrar()" >Adicionar nova pessoa</button>
+<br>
+<br>
+<nz-table #filterTable [nzData]="pessoas" nzTableLayout="fixed"
+  nzShowPagination
+  nzShowSizeChanger
+  [nzFrontPagination]="false"
+  [nzTotal]="totalElementos"
+  (nzPageIndexChange)="mudaPagina($event)"
+  (nzPageSizeChange)="mudaTamanhoPagina($event)"
+>
+  <thead>
+    <tr>
+      <th
+        *ngFor="let coluna of colunas"
+        [nzSortOrder]="coluna.sortOrder"
+        [nzSortFn]="coluna.sortFn"
+        [nzSortDirections]="coluna.sortDirections"
+        [id]="coluna.name"
+      >
+        {{ coluna.name }}
+      </th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data">
+      <td>{{ data.nome }}</td>
+      <td>{{ data.cpf }}</td>
+      <td>{{ data.dataNascimento }}</td>
+      <td>
+        <span class="acao" title="contatos" (click)="abrirModalContatos(data)" nz-icon nzType="contacts" nzTheme="outline"></span>
+        <nz-divider nzType="vertical"></nz-divider>
+        <span class="acao" title="apagar" (click)="showConfirm(data)" nz-icon nzType="delete" nzTheme="outline"></span>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+
+<ng-template #contatos>
+  <nz-list *ngIf="pessoas.length > 0"  nzItemLayout="horizontal" [nzLoading]="isLoading">
+    <nz-list-item *ngFor="let contato of contatosPessoa">
+      <nz-list-item-meta nzDescription="Nome">
+        <nz-list-item-meta-title>
+          <p>{{ contato.nome }}</p>
+          <nz-list-item-meta nzDescription="Telefone">
+            <nz-list-item-meta-title>
+              <p>{{ contato.telefone }}</p>
+            </nz-list-item-meta-title>
+          </nz-list-item-meta>
+          <nz-list-item-meta nzDescription="Email">
+            <nz-list-item-meta-title>
+              <p>{{ contato.email }}</p>
+            </nz-list-item-meta-title>
+          </nz-list-item-meta>
+        </nz-list-item-meta-title>
+      </nz-list-item-meta>
+    </nz-list-item>
+    <nz-list-empty *ngIf="pessoas.length === 0"></nz-list-empty>
+  </nz-list>
+</ng-template>
