@@ -1,11 +1,7 @@
 export const environment = {
   production: true,
   envVar: {
-    /**
-     * Add environment variables you want to retrieve from process
-     * PORT:4200,
-     * VAR_NAME: defaultValue
-     */
-    GCLIENT_ID: ""
-  }
+      GCLIENT_ID: "",
+      BASE_GPC_URL: ""
+}
 };
