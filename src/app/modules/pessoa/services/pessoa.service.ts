@@ -9,7 +9,7 @@ import { PagePessoa } from '../models/page-pessoa.model';
 })
 export class PessoaService {
 
-  private baseUrl = environment.envVar.BASE_GPC_URL;
+  private baseUrl = 'https://gpc-app.andersondias.net.br/api';
 
   constructor(private httpClient: HttpClient) { }
 
