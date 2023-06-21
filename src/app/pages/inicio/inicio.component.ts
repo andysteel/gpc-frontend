@@ -85,6 +85,7 @@ export class InicioComponent implements OnInit {
   mudaTamanhoPagina(event: number) {
     this.filtro.pagina = 1;
     this.filtro.tamanho = event;
+    this.consultaPessoas();
   }
 
   abrirModalContatos(pessoa: PessoaResponse) {
