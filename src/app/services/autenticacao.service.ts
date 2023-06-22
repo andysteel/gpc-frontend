@@ -1,20 +1,20 @@
-import { SocialUser } from '@abacritt/angularx-social-login';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutenticacaoService {
 
-  mostraBotaoLogout = new BehaviorSubject<boolean>(false);
-
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private socialAuthService: SocialAuthService,
+    private notification: NzNotificationService) {}
 
   passarDadosDeLogin(user: SocialUser) {
     sessionStorage.setItem('google-user', JSON.stringify(user));
-    this.mostraBotaoLogout.next(true)
     this.router.navigate(['inicio'])
   }
 
@@ -28,9 +28,15 @@ export class AutenticacaoService {
   }
 
   logout() {
-    sessionStorage.removeItem('google-user');
-    this.mostraBotaoLogout.next(false)
-    this.router.navigate(['welcome']);
+    this.socialAuthService.signOut(true)
+    .then((_) => {
+      sessionStorage.clear();
+      this.router.navigate(['welcome']);
+    })
+    .catch(error => {
+      this.notification.error('Error', 'Erro ao tentar realizar o logout do google');
+      throw new Error(error);
+    })
   }
 
 }

@@ -15,7 +15,9 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {
     this.socialAuthService.authState.subscribe((user) => {
-      this.autenticacaoService.passarDadosDeLogin(user);
+      if(user) {
+        this.autenticacaoService.passarDadosDeLogin(user);
+      }
     });
   }
 
