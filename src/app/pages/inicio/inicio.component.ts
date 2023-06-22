@@ -59,7 +59,7 @@ export class InicioComponent implements OnInit {
     this.consultaPessoas();
   }
 
-  async logOut(): Promise<void> {
+  logOut(): void {
     this.autenticacaoService.logout();
   }
 
